@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import BoxGridScene from './scenes/box-grid-scene';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
-          June Ho's basic REACT site
+          June Ho basic REACT site
         </p>
         <a
           className="App-link"
@@ -16,7 +17,8 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
+        <BoxGridScene />
       </header>
     </div>
   );
