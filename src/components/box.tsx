@@ -8,6 +8,7 @@ export interface Props {
   color?: THREE.Color;
   meshProps: JSX.IntrinsicElements['mesh'];
   initialTime?: number;
+  isMoving?: boolean;
   palette?: ProceduralPalette;
 }
 
@@ -17,6 +18,7 @@ export default function Box({
   color,
   meshProps,
   initialTime = 0,
+  isMoving = true,
   palette,
 }: Props): ReactElement {
   // References
@@ -34,7 +36,7 @@ export default function Box({
       mesh.current.rotation.y += 0.02;
     }
     if (material.current) {
-      if (palette) {
+      if (palette && isMoving) {
         material.current.color = generateColor(
           palette.a,
           palette.b,
@@ -42,8 +44,6 @@ export default function Box({
           palette.d,
           initialTime + clock.getElapsedTime() / 2,
         );
-      } else {
-        material.current.color = color || DEFAULT_COLOR;
       }
     }
   });
@@ -57,7 +57,11 @@ export default function Box({
       onPointerOut={() => setHover(false)}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshPhongMaterial ref={material} />
+      <meshPhongMaterial
+        attach="material"
+        ref={material}
+        color={color || DEFAULT_COLOR}
+      />
     </mesh>
   );
 }
